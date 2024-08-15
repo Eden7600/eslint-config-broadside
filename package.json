@@ -1,0 +1,70 @@
+{
+  "name": "eslint-config-broadside",
+  "description": "A powerful ESLint configuration for a variety of projects.",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "prelint": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eden7600/eslint-config-broadside.git"
+  },
+  "keywords": [
+    "eslint",
+    "config"
+  ],
+  "author": "Eden7600 <cody@stratonimbus.org>",
+  "license": "AGPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/Eden7600/eslint-config-broadside/issues"
+  },
+  "homepage": "https://github.com/Eden7600/eslint-config-broadside#readme",
+  "engines": {
+    "node": ">=20.11.0"
+  },
+  "dependencies": {
+    "@eslint/compat": "^1.1.1",
+    "@eslint/js": "^9.9.0",
+    "@stylistic/eslint-plugin": "^2.6.2",
+    "@typescript-eslint/utils": "^8.0.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-jsdoc": "^50.0.1",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-promise": "^7.1.0",
+    "eslint-plugin-security": "^3.0.1",
+    "eslint-plugin-unicorn": "^55.0.0",
+    "globals": "^15.9.0",
+    "typescript-eslint": "^8.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.2.0",
+    "eslint": "^9.9.0",
+    "prettier": "^3.3.3",
+    "semantic-release": "^24.0.0",
+    "typescript": "^5.5.4",
+    "unbuild": "^2.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "tag": "latest"
+  }
+}
