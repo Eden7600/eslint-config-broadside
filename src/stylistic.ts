@@ -6,7 +6,6 @@ const base: TSESLint.FlatConfig.Config = {
     "@stylistic": stylistic as unknown as TSESLint.Linter.Plugin,
   },
   rules: {
-    "@stylistic/comma-dangle": ["error", "always-multiline"],
     "@stylistic/no-extra-semi": "error",
     "@stylistic/dot-location": ["error", "property"],
     "@stylistic/no-floating-decimal": "error",
@@ -45,7 +44,6 @@ const base: TSESLint.FlatConfig.Config = {
     ],
     "@stylistic/eol-last": "error",
     "@stylistic/function-call-spacing": ["error", "never"],
-    "@stylistic/function-paren-newline": ["error", "multiline"],
     "@stylistic/function-call-argument-newline": ["error", "consistent"],
     "@stylistic/jsx-quotes": ["error", "prefer-single"],
     "@stylistic/key-spacing": [
@@ -162,7 +160,6 @@ const base: TSESLint.FlatConfig.Config = {
       },
     ],
     "@stylistic/template-tag-spacing": ["error", "never"],
-    "@stylistic/arrow-parens": ["error", "as-needed"],
     "@stylistic/arrow-spacing": [
       "error",
       {
