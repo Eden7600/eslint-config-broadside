@@ -58,6 +58,7 @@ const base: TSESLint.FlatConfig.Config = {
 const disableEslintRules: TSESLint.FlatConfig.Config = {
   rules: {
     "dot-notation": "off",
+    "no-unused-vars": "off",
   },
 };
 

@@ -8,21 +8,24 @@ Ahoy, matey! Welcome aboard the most swashbuckling ESLint configuration this sid
 
 ## Features
 
+- 🦜 TypeScript support
 - 🏴‍☠️ Comprehensive rule set to catch even the sneakiest of code smells
-- 🦜 TypeScript support that'll make your types sing like a parrot
-- 🗺️ Customizable options for when you need to chart your own course
+- 🗺️ High quality, opinionated rules to keep your codebase clean and consistent
 - 🔧 Built-in prettier configuration to make your code look shipshape
-- 🆕 Support for the new ESLint flat config format
+- 🆕 First class support for the new ESLint flat config format
+- 🧩 Optional plugins for even more linting power
 
 ## Installation
 
 First, hoist the colors and run:
 
 ```bash
-npm install --save-dev eslint-config-broadside
+npm install --save-dev eslint-config-broadside eslint
 ```
 
 ## Usage
+
+
 
 ### Basic Configuration
 
@@ -31,25 +34,69 @@ Create an `eslint.config.js` file in your project root and import the configurat
 ```javascript
 import { config } from "eslint-config-broadside";
 
-export default config();
+export default await config();
 ```
 
-### Advanced Configuration
 
-For more control over your linting rules, you can use the `tsEslintConfig` function:
+
+
+### Advanced Configuration (JavaScript Projects)
+
+For more control over your linting rules, use the `config` function:
+
+```javascript
+import { config } from "eslint-config-broadside";
+
+export default (async () => {
+  const baseConfig = await config({
+    globals: {
+      // Your global variables
+    },
+    parserOptions: {
+      // Your custom parser options
+    },
+  });
+  return [
+    ...baseConfig,
+    {
+      rules: {
+        // Your custom rules here
+        "no-console": "warn", // Example: Warn about console.log usage
+      },
+    },
+  ];
+})();
+```
+
+### Advanced Configuration (TypeScript Projects)
+
+For more control over your linting rules and TypeScript support, use the `tsEslintConfig` function:
 
 ```javascript
 import { tsEslintConfig } from "eslint-config-broadside";
+import tsEslint from 'typescript-eslint';
 
-export default tsEslintConfig({
-  parserOptions: {
-    // Your custom parser options
-  },
-  globals: {
-    // Your global variables
-  },
-  expertMode: true, // Enable expert mode for less strict rules
-});
+export default (async () => {
+  const baseConfig = await tsEslintConfig({
+    parserOptions: {
+      project: './tsconfig.json', // Point to your TypeScript config
+    },
+    globals: {
+      // Your global variables
+    },
+    expertMode: true, // Enable expert mode for less strict rules
+  });
+
+  return tsEslint.config(
+    ...baseConfig,
+    {
+      rules: {
+        // Your custom rules here
+        "@typescript-eslint/no-explicit-any": "error", // Example: Disallow 'any' type
+      },
+    }
+  );
+})();
 ```
 
 ### Running ESLint
@@ -64,36 +111,30 @@ npx eslint .
 
 The `tsEslintConfig` function accepts an options object with the following properties:
 
-- `parserOptions`: Custom parser options for TypeScript
+- `parserOptions`: Custom parser options for TypeScript (e.g., specifying your `tsconfig.json`)
 - `globals`: Global variables to be defined for all files
-- `expertMode`: Enable less strict rules for experienced developers (default: false)
 
-## Migrating from .eslintrc
 
-If you're moving from the old `.eslintrc` format, here are some key differences:
+## Optional Plugins: Your Secret Weapons
 
-1. Use `eslint.config.js` instead of `.eslintrc.js`
-2. The new format uses a flat array of config objects instead of nested extends
-3. Plugin and parser configurations are now included in the config objects
+`eslint-config-broadside` supports two optional plugins that are like having extra cannons on your ship:
 
-For a detailed migration guide, check out the [ESLint Configuration Migration Guide](https://eslint.org/docs/latest/use/configure/configuration-files-new).
+1. `eslint-plugin-jsdoc`: Keeps your documentation shipshape and Bristol fashion.
+2. `eslint-plugin-unicorn`: Adds a treasure trove of additional ESLint rules to make your code truly legendary.
 
-## Customizing Rules
+If these plugins are installed, they'll be automatically loaded and configured. If not, don't worry - your ship will still sail, just with a little less firepower.
 
-To override or extend rules, create your custom config object and spread it after the base config:
+## Troubleshooting
 
-```javascript
-import { config } from "eslint-config-broadside";
+If ye be encountering any issues, check these common solutions:
 
-export default [
-  ...config(),
-  {
-    rules: {
-      // Your custom rules here
-    },
-  },
-];
-```
+1. Make sure all peer dependencies are installed and up to date
+2. Check that your `eslint.config.js` is in the correct location
+3. Ensure your TypeScript version is compatible (we require ^5.5.4)
+4. If using optional plugins, verify they're installed correctly
+5. Double-check your configuration syntax
+
+If ye still be having troubles, open an issue on our [GitHub repository](https://github.com/Eden7600/eslint-config-broadside). We'll help ye navigate these treacherous waters!
 
 ## Contributing
 

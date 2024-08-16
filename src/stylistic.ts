@@ -45,6 +45,7 @@ const base: TSESLint.FlatConfig.Config = {
     ],
     "@stylistic/eol-last": "error",
     "@stylistic/function-call-spacing": ["error", "never"],
+    "@stylistic/function-paren-newline": ["error", "multiline"],
     "@stylistic/function-call-argument-newline": ["error", "consistent"],
     "@stylistic/jsx-quotes": ["error", "prefer-single"],
     "@stylistic/key-spacing": [
@@ -161,6 +162,7 @@ const base: TSESLint.FlatConfig.Config = {
       },
     ],
     "@stylistic/template-tag-spacing": ["error", "never"],
+    "@stylistic/arrow-parens": ["error", "as-needed"],
     "@stylistic/arrow-spacing": [
       "error",
       {

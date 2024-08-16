@@ -1,5 +1,3 @@
-import tsEslint from "typescript-eslint";
+import { config } from "./dist/index.mjs";
 
-import { defaultConfig } from "./dist/index.mjs";
-
-export default tsEslint.config(...defaultConfig());
+export default await config();

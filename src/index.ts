@@ -3,6 +3,7 @@ import type { TSESLint } from "@typescript-eslint/utils";
 import prettier from "eslint-plugin-prettier/recommended";
 import globals from "globals";
 import tsEslint, { type ConfigWithExtends } from "typescript-eslint";
+import eslintConfigPrettier from "eslint-config-prettier";
 
 import { configs as eslintConfigs } from "./eslint.js";
 import { configs as jsdocConfigs } from "./jsdoc.js";
@@ -11,6 +12,7 @@ import { configs as securityConfigs } from "./security.js";
 import { configs as stylisticConfigs } from "./stylistic.js";
 import { configs as typescriptEslintConfigs } from "./typescriptEslint.js";
 import { configs as unicornConfigs } from "./unicorn.js";
+import { checkPeerDependencies } from "./utils.js";
 
 export {
   eslintConfigs,
@@ -47,12 +49,15 @@ export const defaultConfig = tsEslintConfig;
 /**
  * Exports the default configuration to be passed to `tsEslint.config`. Use this if you want more control of typescript-eslint configuration output.
  * @param {DefaultConfigOptions} options
- * @returns Array of typescript-eslint configurations
+ * @returns Promise<Array of typescript-eslint configurations>
  */
-export function tsEslintConfig(options?: DefaultConfigOptions): ConfigWithExtends[] {
+export async function tsEslintConfig(options?: DefaultConfigOptions): Promise<ConfigWithExtends[]> {
+  const installedPeers = await checkPeerDependencies();
+
   const languageOptions: ConfigWithExtends["languageOptions"] = {
     globals: {
       ...globals.node,
+      ...options?.globals,
     },
     parserOptions: {
       projectService: {
@@ -87,17 +92,17 @@ export function tsEslintConfig(options?: DefaultConfigOptions): ConfigWithExtend
       name: "eslint-config-broadside/base",
       files: ["**/*.ts", "**/*.js", "**/*.cjs", "**/*.mjs", "**/*.tsx"],
       plugins: {
-        ...jsdocConfigs.base.plugins,
+        ...(installedPeers["eslint-plugin-jsdoc"] ? jsdocConfigs.base.plugins : {}),
         ...promiseConfigs.base.plugins,
         ...stylisticConfigs.base.plugins,
-        ...unicornConfigs.base.plugins,
+        ...(installedPeers["eslint-plugin-unicorn"] ? unicornConfigs.base.plugins : {}),
       },
       rules: {
         ...eslintConfigs.base.rules,
-        ...jsdocConfigs.base.rules,
+        ...(installedPeers["eslint-plugin-jsdoc"] ? jsdocConfigs.base.rules : {}),
         ...promiseConfigs.base.rules,
         ...stylisticConfigs.base.rules,
-        ...unicornConfigs.base.rules,
+        ...(installedPeers["eslint-plugin-unicorn"] ? unicornConfigs.base.rules : {}),
       },
     },
     {
@@ -127,8 +132,9 @@ export function tsEslintConfig(options?: DefaultConfigOptions): ConfigWithExtend
       files: ["**/*.js", "**/*.cjs", "**/*.mjs"],
       extends: [tsEslint.configs.disableTypeChecked],
     },
+    eslintConfigPrettier,
     prettier,
-  ] as ConfigWithExtends[];
+  ];
 }
 
 /**
@@ -136,6 +142,7 @@ export function tsEslintConfig(options?: DefaultConfigOptions): ConfigWithExtend
  * @param options
  * @returns An array of eslint configurations
  */
-export function config(options?: DefaultConfigOptions): TSESLint.FlatConfig.ConfigArray {
-  return tsEslint.config(...tsEslintConfig(options));
+export async function config(options?: DefaultConfigOptions): Promise<TSESLint.FlatConfig.ConfigArray> {
+  const baseConfig = await tsEslintConfig(options);
+  return tsEslint.config(...baseConfig);
 }

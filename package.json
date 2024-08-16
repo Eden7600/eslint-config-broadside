@@ -46,22 +46,34 @@
     "@eslint/js": "^9.9.0",
     "@stylistic/eslint-plugin": "^2.6.2",
     "@typescript-eslint/utils": "^8.0.1",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-jsdoc": "^50.0.1",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-promise": "^7.1.0",
     "eslint-plugin-security": "^3.0.1",
-    "eslint-plugin-unicorn": "^55.0.0",
     "globals": "^15.9.0",
     "typescript-eslint": "^8.1.0"
   },
   "devDependencies": {
     "@types/node": "^22.2.0",
     "eslint": "^9.9.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-jsdoc": "^50.0.1",
+    "eslint-plugin-unicorn": "^55.0.0",
     "prettier": "^3.3.3",
     "semantic-release": "^24.0.0",
     "typescript": "^5.5.4",
     "unbuild": "^2.0.0"
+  },
+  "peerDependencies": {
+    "eslint-plugin-jsdoc": "^50.0.1",
+    "eslint-plugin-unicorn": "^55.0.0"
+  },
+  "peerDependenciesMeta": {
+    "eslint-plugin-unicorn": {
+      "optional": true
+    },
+    "eslint-plugin-jsdoc": {
+      "optional": true
+    }
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
