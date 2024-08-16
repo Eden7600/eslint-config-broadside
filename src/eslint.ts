@@ -341,7 +341,7 @@ const base: TSESLint.FlatConfig.Config = {
   },
 };
 
-const cjsAndEsm: TSESLint.FlatConfig.Config = {
+const js: TSESLint.FlatConfig.Config = {
   rules: {
     curly: ["error", "multi-line"],
     "dot-notation": ["error", { allowKeywords: true }],
@@ -373,14 +373,7 @@ const cjsAndEsm: TSESLint.FlatConfig.Config = {
   },
 };
 
-const cjs: TSESLint.FlatConfig.Config = {
-  rules: {
-    strict: ["error", "global"],
-  },
-};
-
 export const configs = {
   base,
-  cjsAndEsm,
-  cjs,
+  js,
 };

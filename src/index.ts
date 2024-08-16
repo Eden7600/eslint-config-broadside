@@ -112,20 +112,12 @@ export async function tsEslintConfig(options?: DefaultConfigOptions): Promise<Co
       ...typescriptEslintConfigs.disableEslintRules,
     },
     {
-      name: "eslint-config-broadside/cjs-and-esm",
+      name: "eslint-config-broadside/js",
       files: ["**/*.js", "**/*.cjs", "**/*.mjs"],
       languageOptions: {
         sourceType: "script",
       },
-      ...eslintConfigs.cjsAndEsm,
-    },
-    {
-      name: "eslint-config-broadside/cjs",
-      files: ["**/*.js", "**/*.cjs"],
-      languageOptions: {
-        sourceType: "script",
-      },
-      ...eslintConfigs.cjs,
+      ...eslintConfigs.js,
     },
     {
       name: "eslint-config-broadside/js-disable-type-check",
