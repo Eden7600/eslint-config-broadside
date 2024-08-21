@@ -6,22 +6,18 @@ import tsEslint, { type ConfigWithExtends } from "typescript-eslint";
 import eslintConfigPrettier from "eslint-config-prettier";
 
 import { configs as eslintConfigs } from "./eslint.js";
-import { configs as jsdocConfigs } from "./jsdoc.js";
 import { configs as promiseConfigs } from "./promise.js";
 import { configs as securityConfigs } from "./security.js";
 import { configs as stylisticConfigs } from "./stylistic.js";
 import { configs as typescriptEslintConfigs } from "./typescriptEslint.js";
-import { configs as unicornConfigs } from "./unicorn.js";
 import { checkPeerDependencies } from "./utils.js";
 
 export {
   eslintConfigs,
-  jsdocConfigs,
   promiseConfigs,
   securityConfigs,
   stylisticConfigs,
   typescriptEslintConfigs,
-  unicornConfigs,
 };
 
 export interface DefaultConfigOptions {
@@ -54,6 +50,12 @@ export const defaultConfig = tsEslintConfig;
 export async function tsEslintConfig(options?: DefaultConfigOptions): Promise<ConfigWithExtends[]> {
   const installedPeers = await checkPeerDependencies();
 
+  // Dynamically import peer dependencies
+  const jsdocConfigs = installedPeers["eslint-plugin-jsdoc"] ? (await import("./jsdoc.js")).configs : null;
+  const unicornConfigs = installedPeers["eslint-plugin-unicorn"]
+    ? (await import("./unicorn.js")).configs
+    : null;
+
   const languageOptions: ConfigWithExtends["languageOptions"] = {
     globals: {
       ...globals.node,
@@ -85,24 +87,32 @@ export async function tsEslintConfig(options?: DefaultConfigOptions): Promise<Co
     {
       languageOptions,
       settings: {
-        ...jsdocConfigs.base.settings,
+        jsdoc: {
+          preferredTypes: {
+            Array: "Array<object>",
+            "Array.": "Array<object>",
+            "Array<>": "[]",
+            "Array.<>": "[]",
+            "Promise.<>": "Promise<>",
+          },
+        },
       },
     },
     {
       name: "eslint-config-broadside/base",
       files: ["**/*.ts", "**/*.js", "**/*.cjs", "**/*.mjs", "**/*.tsx"],
       plugins: {
-        ...(installedPeers["eslint-plugin-jsdoc"] ? jsdocConfigs.base.plugins : {}),
+        ...(jsdocConfigs ? jsdocConfigs.base.plugins : {}),
         ...promiseConfigs.base.plugins,
         ...stylisticConfigs.base.plugins,
-        ...(installedPeers["eslint-plugin-unicorn"] ? unicornConfigs.base.plugins : {}),
+        ...(unicornConfigs ? unicornConfigs.base.plugins : {}),
       },
       rules: {
         ...eslintConfigs.base.rules,
-        ...(installedPeers["eslint-plugin-jsdoc"] ? jsdocConfigs.base.rules : {}),
+        ...(jsdocConfigs ? jsdocConfigs.base.rules : {}),
         ...promiseConfigs.base.rules,
         ...stylisticConfigs.base.rules,
-        ...(installedPeers["eslint-plugin-unicorn"] ? unicornConfigs.base.rules : {}),
+        ...(unicornConfigs ? unicornConfigs.base.rules : {}),
       },
     },
     {
