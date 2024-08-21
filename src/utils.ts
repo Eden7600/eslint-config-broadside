@@ -1,4 +1,5 @@
 import { BroadsidePeerDependencies, BroadsidePeerDependenciesRecord } from "./types/peer-dependencies.js";
+import { resolve } from "import-meta-resolve";
 
 /**
  * Checks which peer dependencies are installed and can be resolved.
@@ -9,9 +10,9 @@ export async function checkPeerDependencies(): Promise<BroadsidePeerDependencies
   const peerDependencies: BroadsidePeerDependencies[] = ["eslint-plugin-unicorn", "eslint-plugin-jsdoc"];
 
   const results = await Promise.all(
-    peerDependencies.map(async (packageName) => {
+    peerDependencies.map((packageName) => {
       try {
-        await import(packageName);
+        resolve(packageName, import.meta.url);
         return [packageName, true] as const;
       } catch (error) {
         if (error instanceof Error && "code" in error && error.code === "ERR_MODULE_NOT_FOUND") {
