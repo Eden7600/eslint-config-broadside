@@ -52,6 +52,13 @@ const base: TSESLint.FlatConfig.Config = {
         objectLiteralTypeAssertions: "allow-as-parameter",
       },
     ],
+    "@typescript-eslint/consistent-type-definitions": ["error", "type"],
+    "@typescript-eslint/consistent-type-exports": [
+      "error",
+      {
+        fixMixedExportsWithInlineTypeSpecifier: true,
+      },
+    ],
   },
 };
 
