@@ -46,6 +46,9 @@ export async function tsEslintConfig(options?: DefaultConfigOptions): Promise<Co
   const unicornConfigs = installedPeers["eslint-plugin-unicorn"]
     ? (await import("./unicorn.js")).configs
     : null;
+  const securityConfigs = installedPeers["eslint-plugin-security"]
+    ? (await import("./security.js")).configs
+    : null;
 
   const languageOptions: ConfigWithExtends["languageOptions"] = {
     globals: {
@@ -94,6 +97,7 @@ export async function tsEslintConfig(options?: DefaultConfigOptions): Promise<Co
         ...(jsdocConfigs ? jsdocConfigs.base.plugins : {}),
         ...promiseConfigs.base.plugins,
         ...stylisticConfigs.base.plugins,
+        ...(securityConfigs ? securityConfigs.base.plugins : {}),
         ...(unicornConfigs ? unicornConfigs.base.plugins : {}),
       },
       rules: {
@@ -101,6 +105,7 @@ export async function tsEslintConfig(options?: DefaultConfigOptions): Promise<Co
         ...(jsdocConfigs ? jsdocConfigs.base.rules : {}),
         ...promiseConfigs.base.rules,
         ...stylisticConfigs.base.rules,
+        ...(securityConfigs ? securityConfigs.base.rules : {}),
         ...(unicornConfigs ? unicornConfigs.base.rules : {}),
       },
     },

@@ -1,4 +1,4 @@
-import { BroadsidePeerDependencies, BroadsidePeerDependenciesRecord } from "./types/peer-dependencies.js";
+import { peerDependencies, BroadsidePeerDependenciesRecord } from "./types/peer-dependencies.js";
 import { resolve } from "import-meta-resolve";
 
 /**
@@ -7,8 +7,6 @@ import { resolve } from "import-meta-resolve";
  * @returns A promise that resolves to an object where keys are peer dependency names and values are booleans indicating if they are installed.
  */
 export async function checkPeerDependencies(): Promise<BroadsidePeerDependenciesRecord> {
-  const peerDependencies: BroadsidePeerDependencies[] = ["eslint-plugin-unicorn", "eslint-plugin-jsdoc"];
-
   const results = await Promise.all(
     peerDependencies.map((packageName) => {
       try {
