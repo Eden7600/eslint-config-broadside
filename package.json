@@ -57,24 +57,14 @@
   "devDependencies": {
     "@types/node": "^22.4.1",
     "eslint": "^9.9.0",
-    "eslint-plugin-jsdoc": "^50.0.1",
-    "eslint-plugin-unicorn": "^55.0.0",
     "prettier": "^3.3.3",
     "semantic-release": "^24.1.0",
     "typescript": "^5.5.4",
     "unbuild": "^2.0.0"
   },
-  "peerDependencies": {
+  "optionalDependencies": {
     "eslint-plugin-jsdoc": "^50.0.1",
     "eslint-plugin-unicorn": "^55.0.0"
-  },
-  "peerDependenciesMeta": {
-    "eslint-plugin-unicorn": {
-      "optional": true
-    },
-    "eslint-plugin-jsdoc": {
-      "optional": true
-    }
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

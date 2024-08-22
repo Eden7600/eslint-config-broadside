@@ -7,18 +7,9 @@ import eslintConfigPrettier from "eslint-config-prettier";
 
 import { configs as eslintConfigs } from "./eslint.js";
 import { configs as promiseConfigs } from "./promise.js";
-import { configs as securityConfigs } from "./security.js";
 import { configs as stylisticConfigs } from "./stylistic.js";
 import { configs as typescriptEslintConfigs } from "./typescriptEslint.js";
 import { checkPeerDependencies } from "./utils.js";
-
-export {
-  eslintConfigs,
-  promiseConfigs,
-  securityConfigs,
-  stylisticConfigs,
-  typescriptEslintConfigs,
-};
 
 export interface DefaultConfigOptions {
   /**
@@ -65,8 +56,6 @@ export async function tsEslintConfig(options?: DefaultConfigOptions): Promise<Co
       projectService: {
         defaultProject: "tsconfig.json",
       },
-      tsconfigRootDir: import.meta.dirname,
-      ...options?.parserOptions,
     },
   };
 
