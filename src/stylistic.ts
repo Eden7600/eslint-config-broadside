@@ -172,7 +172,6 @@ const base: TSESLint.FlatConfig.Config = {
     "@stylistic/rest-spread-spacing": ["error", "never"],
     "@stylistic/template-curly-spacing": "error",
     "@stylistic/yield-star-spacing": ["error", "both"],
-    "@stylistic/indent-binary-ops": ["error", "tab"],
   },
 };
 
