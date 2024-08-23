@@ -117,13 +117,31 @@ The `tsEslintConfig` function accepts an options object with the following prope
 
 ## Optional Plugins: Your Secret Weapons
 
-`eslint-config-broadside` supports optional plugins for additional linting power:
+`eslint-config-broadside` supports integration with several third-party ESLint plugins. These plugins are optional and provide additional linting capabilities:
 
 1. `eslint-plugin-jsdoc`: Keeps your documentation shipshape and Bristol fashion.
 2. `eslint-plugin-unicorn`: Adds a treasure trove of additional ESLint rules to make your code truly legendary.
 3. `eslint-plugin-security`: Protects your code from common security vulnerabilities, keeping your ship safe from digital pirates.
 
-If these plugins are installed, they'll be automatically loaded and configured. If not, don't worry - your ship will still sail, just with a little less firepower.
+To use these plugins, you need to install them separately in your project. You can do this by running:
+
+```bash
+npm install --save-dev eslint-plugin-jsdoc eslint-plugin-unicorn eslint-plugin-security
+```
+
+Or for a specific plugin:
+
+```bash
+npm install --save-dev eslint-plugin-jsdoc
+```
+
+Once installed, `eslint-config-broadside` will automatically detect and configure these third-party plugins. If they're not installed, your configuration will still work, just without the additional rules these plugins provide.
+
+For more information about these plugins, visit their respective GitHub repositories:
+- [eslint-plugin-jsdoc](https://github.com/gajus/eslint-plugin-jsdoc)
+- [eslint-plugin-unicorn](https://github.com/sindresorhus/eslint-plugin-unicorn)
+- [eslint-plugin-security](https://github.com/eslint-community/eslint-plugin-security)
+
 
 ## Troubleshooting
 
