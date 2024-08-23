@@ -117,10 +117,11 @@ The `tsEslintConfig` function accepts an options object with the following prope
 
 ## Optional Plugins: Your Secret Weapons
 
-`eslint-config-broadside` supports two optional plugins that are like having extra cannons on your ship:
+`eslint-config-broadside` supports optional plugins for additional linting power:
 
 1. `eslint-plugin-jsdoc`: Keeps your documentation shipshape and Bristol fashion.
 2. `eslint-plugin-unicorn`: Adds a treasure trove of additional ESLint rules to make your code truly legendary.
+3. `eslint-plugin-security`: Protects your code from common security vulnerabilities, keeping your ship safe from digital pirates.
 
 If these plugins are installed, they'll be automatically loaded and configured. If not, don't worry - your ship will still sail, just with a little less firepower.
 
