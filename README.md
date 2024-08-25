@@ -84,7 +84,6 @@ export default (async () => {
     globals: {
       // Your global variables
     },
-    expertMode: true, // Enable expert mode for less strict rules
   });
 
   return tsEslint.config(
