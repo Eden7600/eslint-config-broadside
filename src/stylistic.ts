@@ -167,7 +167,6 @@ const base: TSESLint.FlatConfig.Config = {
         after: true,
       },
     ],
-    "@stylistic/block-spacing": ["error", "never"],
     "@stylistic/generator-star-spacing": ["error", "both"],
     "@stylistic/rest-spread-spacing": ["error", "never"],
     "@stylistic/template-curly-spacing": "error",
