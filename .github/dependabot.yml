@@ -11,7 +11,7 @@ updates:
       - "Eden7600"
     labels:
       - "dependencies"
-      - "npm"
+    target-branch: "development"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -22,5 +22,5 @@ updates:
     reviewers:
       - "Eden7600"
     labels:
-      - "ci"
-      - "github-actions"
+      - "dependencies"
+    target-branch: "development"
