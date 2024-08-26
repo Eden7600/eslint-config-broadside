@@ -7,7 +7,6 @@ import eslintConfigPrettier from "eslint-config-prettier";
 
 import { configs as eslintConfigs } from "./eslint.js";
 import { configs as promiseConfigs } from "./promise.js";
-import { configs as stylisticConfigs } from "./stylistic.js";
 import { configs as typescriptEslintConfigs } from "./typescriptEslint.js";
 import { checkPeerDependencies } from "./utils.js";
 
@@ -96,7 +95,6 @@ export async function tsEslintConfig(options?: DefaultConfigOptions): Promise<Co
       plugins: {
         ...(jsdocConfigs ? jsdocConfigs.base.plugins : {}),
         ...promiseConfigs.base.plugins,
-        ...stylisticConfigs.base.plugins,
         ...(securityConfigs ? securityConfigs.base.plugins : {}),
         ...(unicornConfigs ? unicornConfigs.base.plugins : {}),
       },
@@ -104,7 +102,6 @@ export async function tsEslintConfig(options?: DefaultConfigOptions): Promise<Co
         ...eslintConfigs.base.rules,
         ...(jsdocConfigs ? jsdocConfigs.base.rules : {}),
         ...promiseConfigs.base.rules,
-        ...stylisticConfigs.base.rules,
         ...(securityConfigs ? securityConfigs.base.rules : {}),
         ...(unicornConfigs ? unicornConfigs.base.rules : {}),
       },
