@@ -63,7 +63,7 @@
     "unbuild": "^2.0.0"
   },
   "optionalDependencies": {
-    "eslint-plugin-jsdoc": "^50.0.1",
+    "eslint-plugin-jsdoc": "^50.2.4",
     "eslint-plugin-unicorn": "^55.0.0",
     "eslint-plugin-security": "^3.0.1"
   },
